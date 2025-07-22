@@ -99,7 +99,7 @@ Ne disposant **pas de matériel AMD ROCm compatible**, il serait intéressant d'
  Si vous êtes intéressé, n'hésitez pas à me contacter à cette adresse : contact@pingwo.org
 
 
-### Chipset Raspberry Pi 4/5 for IA embarquée :
+### Chipset Raspberry Pi 4/5 IA embarquée :
 
 **Version binaire en cours de développement.** Je vous tiendrai informé de l'avancement du projet.
 
