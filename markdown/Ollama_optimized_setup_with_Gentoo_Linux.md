@@ -84,7 +84,7 @@ strix # emerge -av ollama
 Calculating dependencies... done!
 Dependency resolution took 1.46 s (backtrack: 0/20).
 
-[ebuild   R   ~] sci-ml/ollama-0.9.6::strix-overlay  USE="blas cuda mkl -rocm" AMDGPU_TARGETS="-gfx90a -gfx803 -gfx900 -gfx906 -gfx908 -gfx940 -gfx941 -gfx942 -gfx1010 -gfx1011 -gfx1012 -gfx1030 -gfx1031 -gfx1100 -gfx1101 -gfx1102 -gfx1200 -gfx1201" CPU_FLAGS_X86="avx avx2 avx_vnni bmi2 f16c fma3 sse4_2 -avx512_vnni -avx512f -avx512vbmi" 0 KiB
+[ebuild   R   ~] sci-ml/ollama-0.9.6::guru  USE="blas cuda mkl -rocm" AMDGPU_TARGETS="-gfx90a -gfx803 -gfx900 -gfx906 -gfx908 -gfx940 -gfx941 -gfx942 -gfx1010 -gfx1011 -gfx1012 -gfx1030 -gfx1031 -gfx1100 -gfx1101 -gfx1102 -gfx1200 -gfx1201" CPU_FLAGS_X86="avx avx2 avx_vnni bmi2 f16c fma3 sse4_2 -avx512_vnni -avx512f -avx512vbmi" 0 KiB
 
 Total: 1 package (1 reinstall), Size of downloads: 0 KiB
 
