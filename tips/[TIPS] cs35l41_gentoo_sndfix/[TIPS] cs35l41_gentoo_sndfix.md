@@ -91,7 +91,7 @@ Je recommande de partir de la configuration par défaut, pour ensuite ajouter un
 
 `# emerge -av media-video/pipewire media-video/wireplumber`
 
-Il faut également prendre conscience que ce chipset son récent, est encore en développement; et n'as pu être complétement  implémenté. Pulseaudio et Pipewire ne permettent pas encore de tirer profit de l'ensemble du chipset Cirrus compatible Dolby.
+Il faut également savoir que ce chipset son récent, est encore en développement; et n'as pu être complétement  implémenté. Pulseaudio et Pipewire ne permettent pas encore de tirer profit de l'ensemble du chipset Cirrus compatible Dolby.
 
 Les mises à jour à venir, permettront certainement à terme de le supporter complétement.
 
@@ -112,3 +112,6 @@ Ainsi que la modification du quantum permettent d'améliorer la stabilité et la
 Au niveau des firmwares, l'installation de linux-firmware et sof-firmware assure la compatibilité avec le chipset CS35L41.
 
 Cette configuration a été testée sur une machine ASUS ROG Strix G814JV sous Gentoo Linux et devrait être applicable à d'autres configurations équipées de ce chipset.
+
+
+Mis à jour le 3/6/2026
