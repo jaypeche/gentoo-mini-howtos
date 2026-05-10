@@ -40,7 +40,7 @@ On vérifie ensuite qu'on utilise le bon chipset :
 
 `dmesg | grep -in20 alc294`
 
-## 3. Problèmes de stuttering/crackling cl( Phénomène de craquements )
+## 3. Problèmes de stuttering/cracking ( Phénomène de craquements )
 
 Il arrive souvent avec ce chipset récent de renconter des problèmes de craquements ou de déchirures du son.
 Il m'a fallu beaucoup de recherches infructueuses, avant de trouver ce post fort utile qui m'a clairement permis d'apprécier une sonorité de qualité avec l'audio interne.
