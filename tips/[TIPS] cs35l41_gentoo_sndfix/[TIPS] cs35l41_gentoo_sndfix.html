@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>[TIPS] cs35l41_gentoo_sndfix.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="tips--working-cirrus-cs35l41-sound-chipset-on-asus_rog_strix-2023">TIPS : Working Cirrus CS35L41 sound chipset on ASUS_RoG_Strix 2023</h1>
+<p>Le chipset son Cirrus CS35L41, présent sur plusieurs modèles d'ordinateurs ASUS ROG Strix 2023, est connu pour poser des problèmes de compatibilité sous Gentoo Linux. Bien que ce chipset soit réputé pour sa qualité audio, il peut entraîner des difficultés comme l'absence de son, des craquements ou des déchirures sonores.</p>
+<p>Dans ce mémo, je partage une solution complète pour résoudre ces problèmes, en mettant en avant les configurations kernel, les paramètres de Pipewire, les firmwares nécessaires, et même des conseils matériels pour optimiser l'audio interne. Cette configuration a été testée sur une machine G814JV, mais elle devrait être applicable à d'autres configurations similaires.</p>
+<p><strong>J'ai pour ma part été confronté à 6 problèmes différents :</strong></p>
+<h2 id="1-support-cirrus-chipset--kernel-618-">1. Support Cirrus chipset ( kernel-6.18+ )</h2>
+<p>Comme en informatique cela ne sert à rien de réinventer la roue.
+Je mets à votre disposition, ma config kernel Gentoo incluant les différents chipsets de mon G814JV.</p>
+<p>Elle est basée sur la configuration Gentoo standard améliorée ( Cirrus/Intel/Nvidia/Netfilter/ACPI... ) et devrait pouvoir s'appliquer à d'autres configurations car elle se veut généraliste.</p>
+<p>Elle est disponible içi :</p>
+<ul>
+<li><a href="https://gist.github.com/jaypeche/a70212ed1598f2a83b529979a30bf738">Kernel 6.18.18 configuration</a></li>
+</ul>
+<p>Avec cette config kernel, les modules suivants devraient être chargés :</p>
+<ul>
+<li><a href="https://gist.github.com/jaypeche/e265ffc41091d874ee830fc0831ac49c">lsmod | grep snd</a></li>
+</ul>
+<h2 id="2-absence-de-son-sur-la-sortie-interne--pipewire--pulseaudio-">2. Absence de son sur la sortie interne ( pipewire || pulseaudio )</h2>
+<p>Il s'agit d'un bug connu sous Gentoo, d'après la documentation officielle il suffit simplement d'activer &quot;Serial Bus Multi Instantiate&quot; dans le kernel, pour que les hauts-parleurs internes soient bien mappés, reconnus et fonctionnels.</p>
+<ul>
+<li>https://wiki.gentoo.org/wiki/User:Pietinger/Experimental/Manual_Configuring_Current_Kernel#Serial_Bus_Multi_Instantiate</li>
+</ul>
+<p><code>Device Drivers  ---&gt;     -*- X86 Platform Specific Device Drivers  ---&gt;         [*]   Serial bus multi instantiate pseudo device driver </code></p>
+<p>On précisera également le chipset au noyau en renseignant /etc/modprobe.d/10-alsa.conf :</p>
+<p><code>options snd-hda-intel model=alc294</code></p>
+<p>On vérifie ensuite qu'on utilise le bon chipset :</p>
+<p><code>dmesg | grep -in20 alc294</code></p>
+<h2 id="3-problèmes-de-stutteringcracking--phénomène-de-craquements-">3. Problèmes de stuttering/cracking ( Phénomène de craquements )</h2>
+<p>Il arrive souvent avec ce chipset récent de renconter des problèmes de craquements ou de déchirures du son.
+Il m'a fallu beaucoup de recherches infructueuses, avant de trouver ce post fort utile qui m'a clairement permis d'apprécier une sonorité de qualité avec l'audio interne.</p>
+<ul>
+<li>https://forums.gentoo.org/viewtopic.php?p=8863683</li>
+</ul>
+<p>Il s'agit d'ajouter ces deux variables d'environnement à la config make.conf de portage, et ensuite recompiler votre serveur audio ( pipewire dans mon cas ).</p>
+<ul>
+<li><strong>Ajouter ceçi à votre /etc/portage/make.conf :</strong></li>
+</ul>
+<p><code>PORTAGE_NICENESS=19 PORTAGE_SCHEDULING_POLICY=batch</code></p>
+<ul>
+<li><strong>Recompiler ensuite votre serveur son; pour pipewire par exemple :</strong></li>
+</ul>
+<p><code># emerge -av media-video/pipewire media-video/wireplumber</code></p>
+<ul>
+<li><strong>Il peut être utile d'élargir la valeur minimale du quantum dans pipewire conf :</strong></li>
+</ul>
+<p><code>nano /etc/pipewire/pipewire.conf.d/01-increase-quantum.conf</code></p>
+<ul>
+<li><strong>Modifier 01-increase-quantum.conf comme ceçi :</strong></li>
+</ul>
+<p><code>context.properties = {         default.clock.quantum     = 2048         default.clock.min-quantum = 2048         default.clock.max-quantum = 4096 } </code></p>
+<ul>
+<li><strong>Cela devrait avoir un impact positif sur la stabilité du flux audio.</strong></li>
+</ul>
+<h2 id="4-présence-des-firmwares-à-jour--sys-kernellinux-firmware-sys-firmwaresof-firmware-">4. Présence des firmwares à jour ( sys-kernel/linux-firmware sys-firmware/sof-firmware )</h2>
+<p><code># echo &quot;sys-kernel/linux-firmware ~amd64&quot; &gt;&gt; /etc/portage/package.accept_keywords/linux-firmware</code></p>
+<p><code># mount /boot &amp;&amp; emerge -av sys-kernel/linux-firmware sys-firmware/sof-firmware</code></p>
+<h2 id="5-migration-vers-pipewire-sound-server--media-videopipewire-media-videowireplumber-">5. Migration vers pipewire sound server ( media-video/pipewire media-video/wireplumber )</h2>
+<p>Gentoo Linux tend depuis quelques mois à remplacer pulseaudio par pipewire.</p>
+<p>Je recommande de partir de la configuration par défaut, pour ensuite ajouter une à une d'autres fonctionnalités.</p>
+<p><code># echo &quot;media-video/pipewire bluetooth pipewire-alsa sound-server&quot; &gt;&gt; /etc/portage/package.use/pipewire</code></p>
+<p><code># emerge -av media-video/pipewire media-video/wireplumber</code></p>
+<p>Il faut également savoir que ce chipset son récent, est encore en développement; et n'as pu être complétement  implémenté. Pulseaudio et Pipewire ne permettent pas encore de tirer profit de l'ensemble du chipset Cirrus compatible Dolby.</p>
+<p>Les mises à jour à venir, permettront certainement à terme de le supporter complétement.</p>
+<h2 id="6-hardware---hp-interne-mal-positionné">6. Hardware - HP interne mal positionné</h2>
+<p>Lors du nettoyage de la ventilation, je me suis aperçu qu'un des deux HPs rectangulaires était mal positionné. Ils sont logiquement, montés sur silent-blocs, afin justement d'éviter les vibrations mécaniques. Le repositionement du HP sur son support a résolu ce problème audio parasite.</p>
+<h2 id="pour-finir-">Pour finir :</h2>
+<p>La configuration proposée dans ce mémo vise à résoudre les problèmes audio liés au chipset Cirrus CS35L41 en optimisant à la fois le noyau Linux, le serveur audio (Pipewire), et les firmwares nécessaires.</p>
+<p>Au niveau du noyau, l'activation de l'option &quot;Serial Bus Multi Instantiate&quot; permet de corriger un bug connu lié à la reconnaissance des haut-parleurs internes.
+Au niveau de Pipewire, l'ajout des variables d'environnement :</p>
+<p>PORTAGE_NICENESS et PORTAGE_SCHEDULING_POLICY</p>
+<p>Ainsi que la modification du quantum permettent d'améliorer la stabilité et la performance du flux audio.
+Au niveau des firmwares, l'installation de linux-firmware et sof-firmware assure la compatibilité avec le chipset CS35L41.</p>
+<p>Cette configuration a été testée sur une machine ASUS ROG Strix G814JV sous Gentoo Linux et devrait être applicable à d'autres configurations équipées de ce chipset.</p>
+<p>Mis à jour le 3/6/2026</p>
+
+</body>
+</html>
