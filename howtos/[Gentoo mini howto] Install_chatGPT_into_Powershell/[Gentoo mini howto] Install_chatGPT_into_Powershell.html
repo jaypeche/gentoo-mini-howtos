@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>[Gentoo mini howto] Install_chatGPT_into_Powershell.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="mini_howto-install-chatgpt-into-windows-powershell-2024">Mini_Howto Install chatGPT into Windows PowerShell 2024</h1>
+<h2 id="installation-of-python3_12">Installation of Python3_12</h2>
+<p><code>PS mkdir 'C:\Program Files\Python3_12\'  </code></p>
+<p><code>PS cd 'C:\Program Files\Python3_12\'   </code></p>
+<p><code>PS curl https://www.python.org/ftp/python/3.12.6/python-3.12.6-amd64.exe -o python-3.12.6-amd64.exe  </code></p>
+<p><code>PS .\python-3.12.6-amd64.exe  </code></p>
+<h2 id="check-python-pip-version">Check Python pip version</h2>
+<p><code>PS python --version  </code></p>
+<p><code>PS pip --version</code></p>
+<h2 id="create-directory-for-virtualenv">Create directory for virtualenv</h2>
+<p><code>PS mkdir 'C:\Users\your_user\chatGPT\'  </code></p>
+<p><code>PS cd 'C:\Users\your_user\chatGPT\'  </code></p>
+<h2 id="create-virtualenv-for-chatgpt-client">Create virtualenv for ChatGPT client</h2>
+<p><code>PS python -m venv 'C:\Users\your_user\chatGPT\'</code></p>
+<h2 id="chatgpt-virtualenv-must-be-populate-like-this-">ChatGPT virtualenv must be populate like this :</h2>
+<p><code>PS ls 'C:\Users\your_user\chatGPT\'</code></p>
+<p>Mode                 LastWriteTime         Length Name</p>
+<hr>
+<p>d-----        09/09/2024     22:32                Include<br>
+d-----        09/09/2024     22:32                Lib<br>
+d-----        09/09/2024     22:33                Scripts<br>
+-a----        09/09/2024     22:32            262 pyvenv.cfg</p>
+<h2 id="after-creating-openai_api_key-on-httpsplatformopenaicom-define-them-like-this-">After creating OPENAI_API_KEY on https://platform.openai.com/, define them like this :</h2>
+<p><code>PS [System.Environment]::SetEnvironmentVariable('OPENAI_API_KEY', 'your_api_key', [System.EnvironmentVariableTarget]::User)</code></p>
+<h2 id="define-path-for-python312-scripts-recommanded-">Define PATH for Python312 Scripts (recommanded) :</h2>
+<p><code>PS $env:Path += &quot;;C:\Users\your_user\AppData\Roaming\Python\Python312\Scripts\&quot;</code></p>
+<h2 id="autorize-shell-execution-locally">Autorize Shell execution locally</h2>
+<p><code>PS Powershell -ExecutionPolicy UnRestricted -command &quot;C:\Users\your_user\chatGPT\Scripts\Activate.ps1&quot;  </code></p>
+<p><code>PS Powershell -ExecutionPolicy UnRestricted -command &quot;C:\Users\your_user\chatGPT\Scripts\deactivate.bat&quot;</code></p>
+<h2 id="or-autorize-shell-execution-globally-if-not-working-be-careful-">Or Autorize Shell execution globally if not working (Be Careful !)</h2>
+<p><code>PS Set-ExecutionPolicy Unrestricted</code></p>
+<h2 id="install-shellgpt-client-">Install ShellGPT client :</h2>
+<p><code>PS pip.exe install shell-gpt</code></p>
+<h2 id="loading-chatgpt-into-terminal-">Loading chatGPT into terminal :</h2>
+<p><code>PS C:\Users\your_user\chatGPT\Scripts\Activate.ps1</code></p>
+<h2 id="close-chatgpt-session-like-this-">Close chatGPT session like this :</h2>
+<p><code>PS C:\Users\your_user\chatGPT\Scripts\deactivate.bat</code></p>
+<h2 id="for-shell-dialog-with-gpt-openai">For Shell dialog with GPT OpenAI</h2>
+<p><code>PS sgpt.exe &quot;Write Hello World in bash&quot;</code></p>
+<p>Enjoy !</p>
+<p>Sources:  	https://www.moyens.net/comment/comment-configurer-et-utiliser-chatgpt-dans-le-terminal-linux/<br>
+https://python.land/virtual-environments/virtualenv<br>
+https://platform.openai.com/docs/overview<br>
+https://www.python.org/doc/</p>
+
+</body>
+</html>
